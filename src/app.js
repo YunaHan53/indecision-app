@@ -9,57 +9,55 @@ console.log("App.js is running!")
 const app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of a computer',
-  option: ['One', 'Two']
+  option: []
 };
 
-// JSX - JavaScript XML
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    <p>{app.option.length > 0 ? 'Here are your options:' : 'No Options'}</p>
-    <ol>
-      <li>Item one</li>
-      <li>Item two</li>
-    </ol>
-  </div>
-);
-
-let count = 0
-const addOne = () => {
-  count++
-  renderCounterApp()
+// function
+const onFormSubmit = (e) => {
+  // Prevents the entire page from reloading
+  e.preventDefault()
+  // Get the user inputed value
+  const option = e.target.elements.option.value
+  // Check if there is a value typed in
+  if (option) {
+    // Pushes the user inputed value into the option array in app
+    app.option.push(option)
+    // Clears the input typed in
+    e.target.elements.option.value = ''
+    render()
+  }
 }
 
-const minusOne = () => {
-  // subtract 1 from count - rerender
-  count--
-  renderCounterApp()
+// Create "Remove All" button above list
+// On click -> wipe the array -> rerender
+const onRemoveAll = () => {
+  app.option = []
+  render()
 }
-
-const reset = () => {
-  // set count to 0 - rerender
-  count = 0
-  renderCounterApp()
-}
-
-// Challenge
-// Make button "-1" - setup minusOne function and register - log "minusOne"
-// Make reset button "reset" - setup reset function - log "reset"
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-  const templateTwo = (
+// JSX - JavaScript XML
+const render = () => {
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <h1>{app.title}</h1>
+      {app.subtitle && <p>{app.subtitle}</p>}
+      <p>{app.option.length > 0 ? 'Here are your options:' : 'No Options'}</p>
+      <p>{app.option.length}</p>
+      <button onClick ={onRemoveAll}>Remove All</button>
+      <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option"/>
+        <button>Add Option</button>
+      </form>
     </div>
   )
 
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot)
 }
 
-renderCounterApp()
+render()
