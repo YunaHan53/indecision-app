@@ -39,6 +39,8 @@ var onRemoveAll = function onRemoveAll() {
 
 var appRoot = document.getElementById('app');
 
+// const numbers = [55, 101, 1000]
+
 // JSX - JavaScript XML
 var render = function render() {
   var template = React.createElement(
@@ -72,16 +74,13 @@ var render = function render() {
     React.createElement(
       'ol',
       null,
-      React.createElement(
-        'li',
-        null,
-        'Item one'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Item two'
-      )
+      app.option.map(function (opt) {
+        return React.createElement(
+          'li',
+          { key: opt },
+          opt
+        );
+      })
     ),
     React.createElement(
       'form',
@@ -99,3 +98,5 @@ var render = function render() {
 };
 
 render();
+
+// [<p key="1">a</p>, <p key="2">b</p>, <p key="3">c</p>]
