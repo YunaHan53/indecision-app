@@ -60,7 +60,7 @@ const render = () => {
         }) */
       }
       <ol>
-      { /* Map over app.options gettting back an array of lis (set key and text) */}
+      { /* Map over app.options getting back an array of list (set key and text) */}
       {
         app.option.map((opt) => {
           return <li key={opt}>{opt}</li>
