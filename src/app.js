@@ -12,7 +12,7 @@ const app = {
   option: []
 };
 
-// function
+// Function
 const onFormSubmit = (e) => {
   // Prevents the entire page from reloading
   e.preventDefault()
@@ -35,9 +35,15 @@ const onRemoveAll = () => {
   render()
 }
 
-const appRoot = document.getElementById('app');
+// Create "What should I do?" button
+// Generates a random option to user on click
+const onMakeDecision = () => {
+  const randomNum = Math.floor(Math.random() * app.option.length)
+  const option = app.option[randomNum]
+  alert(option)
+}
 
-// const numbers = [55, 101, 1000]
+const appRoot = document.getElementById('app');
 
 // JSX - JavaScript XML
 const render = () => {
@@ -46,7 +52,7 @@ const render = () => {
       <h1>{app.title}</h1>
       {app.subtitle && <p>{app.subtitle}</p>}
       <p>{app.option.length > 0 ? 'Here are your options:' : 'No Options'}</p>
-      <p>{app.option.length}</p>
+      <button disabled={app.option.length === 0} onClick ={onMakeDecision}>What should I do?</button>
       <button onClick ={onRemoveAll}>Remove All</button>
       {
         /* numbers.map((number) => {

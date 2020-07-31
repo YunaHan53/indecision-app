@@ -14,7 +14,7 @@ var app = {
   option: []
 };
 
-// function
+// Function
 var onFormSubmit = function onFormSubmit(e) {
   // Prevents the entire page from reloading
   e.preventDefault();
@@ -37,9 +37,15 @@ var onRemoveAll = function onRemoveAll() {
   render();
 };
 
-var appRoot = document.getElementById('app');
+// Create "What should I do?" button
+// Generates a random option to user on click
+var onMakeDecision = function onMakeDecision() {
+  var randomNum = Math.floor(Math.random() * app.option.length);
+  var option = app.option[randomNum];
+  alert(option);
+};
 
-// const numbers = [55, 101, 1000]
+var appRoot = document.getElementById('app');
 
 // JSX - JavaScript XML
 var render = function render() {
@@ -62,9 +68,9 @@ var render = function render() {
       app.option.length > 0 ? 'Here are your options:' : 'No Options'
     ),
     React.createElement(
-      'p',
-      null,
-      app.option.length
+      'button',
+      { disabled: app.option.length === 0, onClick: onMakeDecision },
+      'What should I do?'
     ),
     React.createElement(
       'button',
