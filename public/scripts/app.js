@@ -1,41 +1,46 @@
 'use strict';
 
-var visibility = false;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-// Create button to toggle the visibility of the details
-var onToggle = function onToggle() {
-  // Sets the current state of visibility to its opposite (visible : invisible)
-  visibility = !visibility;
-  render();
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var appRoot = document.getElementById('app');
+// Challenge
+// 1. Set up constructor to take name and age (default age to 0)
+// 2. getDescription - Andrew Mead is 26 years old.
 
-var render = function render() {
-  var jsx = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Visibility Toggle'
-    ),
-    React.createElement(
-      'button',
-      { onClick: onToggle },
-      visibility ? 'Hide Details' : 'Show Details'
-    ),
-    visibility && React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'p',
-        null,
-        'These are the details you can now see!'
-      )
-    )
-  );
-  ReactDOM.render(jsx, appRoot);
-};
+var Person = function () {
+  // Define the class
+  // Defaulting the arguments syntax: `name = 'Anonymous'`
+  function Person() {
+    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+    var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-render();
+    _classCallCheck(this, Person);
+
+    this.name = name;
+    this.age = age;
+  }
+
+  _createClass(Person, [{
+    key: 'getGreeting',
+    value: function getGreeting() {
+      // return 'Hi, I am ' + this.name + '!'
+      return 'Hi, I am ' + this.name + '!';
+    }
+  }, {
+    key: 'getDescription',
+    value: function getDescription() {
+      return this.name + ' is ' + this.age + ' year(s) old.';
+    }
+  }]);
+
+  return Person;
+}();
+
+var me = new Person('Andrew Mead', 26);
+console.log(me.getGreeting());
+console.log(me.getDescription());
+
+var other = new Person();
+console.log(other.getGreeting());
+console.log(other.getDescription());
